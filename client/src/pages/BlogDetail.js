@@ -28,21 +28,47 @@ export default function BlogDetail() {
     navigate("/create");
   };
 
-  const detailContent = loading ? (
-    <div className="spinner-widget">
-      <div
-        className="spinner-border spinner-border-lg ms-2"
-        role="status"
-        style={{ width: "3rem", height: "3rem" }}
-      >
-        <span className="visually-hidden">Loading...</span>
+  // const spinner = (
+  //   <div className="spinner-widget">
+  //     <div
+  //       className="spinner-border spinner-border-lg ms-2"
+  //       role="status"
+  //       style={{ width: "3rem", height: "3rem" }}
+  //     >
+  //       <span className="visually-hidden">Loading...</span>
+  //     </div>
+  //   </div>
+  // );
+
+  let skeleton = (
+    <div className="content">
+      <div className="skeleton skeleton-img-full"></div>
+      <div className="d-flex">
+        <div className="skeleton user skeleton-img-user"></div>
+        <div className="skeliton-info">
+          <div className="skeleton skeleton-text"></div>
+          <div className="skeleton skeleton-text"></div>
+        </div>
+      </div>
+      <div className="content">
+        <h1 className="skeleton skeleton-heading"></h1>
+        <div className="skeleton skeleton-text"></div>
+        <div className="skeleton skeleton-text"></div>
+        <div className="skeleton skeleton-text"></div>
+        <div className="skeleton skeleton-text"></div>
+        <div className="skeleton skeleton-text"></div>
+        <div className="skeleton skeleton-text"></div>
       </div>
     </div>
+  );
+
+  const detailContent = loading ? (
+    skeleton
   ) : (
     <div className="content">
       <img src={post?.postimage} alt="" />
       <div className="user">
-        {post?.profilePicture && <img src={post?.profilePicture} alt="" />}
+        <img src={post?.profilePicture} alt="" />
         <div className="info">
           <span>{post?.username}</span>
           <p>Posted {moment(post?.createdAt).startOf("hour").fromNow()}</p>

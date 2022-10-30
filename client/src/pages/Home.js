@@ -6,6 +6,7 @@ import { getposts, editPost } from "../actions";
 export default function Home() {
   const navigate = useNavigate();
   const postItems = useSelector((state) => state?.postReducer?.posts);
+  //const loading = true;
   const loading = useSelector((state) => state?.postReducer?.loading);
   const dispatch = useDispatch();
   const cat = useLocation().search;
@@ -27,6 +28,18 @@ export default function Home() {
     return doc.body.textContent;
   };
 
+  /* const spinner = (
+    <div className="spinner-widget">
+      <div
+        className="spinner-border spinner-border-lg ms-2"
+        role="status"
+        style={{ width: "3rem", height: "3rem" }}
+      >
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  ); */
+
   const blogCategory =
     postItems?.length > 0 ? (
       postItems?.map((post) => (
@@ -46,21 +59,24 @@ export default function Home() {
     ) : (
       <h1>No post in the selected category</h1>
     );
-
-  const homeContent = loading ? (
-    <div className="spinner-widget">
-      <div
-        className="spinner-border spinner-border-lg ms-2"
-        role="status"
-        style={{ width: "3rem", height: "3rem" }}
-      >
-        <span className="visually-hidden">Loading...</span>
+  let skeleton = [];
+  for (let i = 0; i < 2; i++) {
+    skeleton.push(
+      <div className="post" key={i}>
+        <div className="skeleton skeleton-img"></div>
+        <div className="content">
+          <h1 className="skeleton skeleton-heading"></h1>
+          <div className="skeleton skeleton-text"></div>
+          <div className="skeleton skeleton-text"></div>
+          <div className="skeleton skeleton-text"></div>
+          <div className="skeleton skeleton-text"></div>
+        </div>
       </div>
-    </div>
-  ) : (
-    blogCategory
-  );
-
+    );
+  }
+  console.log(skeleton);
+  const homeContent = loading ? skeleton : blogCategory;
+  console.log(homeContent);
   return (
     <div className="container">
       <div

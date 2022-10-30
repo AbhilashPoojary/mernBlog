@@ -13,8 +13,8 @@ export default function Pofile() {
 
   return (
     <section
-      className="profile-section"
-      style={{ height: "calc(100vh - 144px)" }}
+      className="profile-section pt-3 pb-3"
+      style={{ height: "calc(100vh - 160px)" }}
     >
       <div className="container">
         <h1>

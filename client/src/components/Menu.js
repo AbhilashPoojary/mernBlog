@@ -21,6 +21,7 @@ export default function Menu() {
     };
     dispatch(otherPosts(info));
   }, [currentPost?._id, currentPost?.category, dispatch]);
+
   const similarPosts =
     diffposts?.length > 0 ? (
       <>
@@ -37,16 +38,28 @@ export default function Menu() {
       <h3>No similar blog posts</h3>
     );
 
-  const menuContent = loading ? (
-    <div class="d-flex align-items-center">
-      <div
-        class="spinner-border ms-auto"
-        role="status"
-        aria-hidden="true"
-      ></div>
-    </div>
-  ) : (
-    similarPosts
-  );
+  let skeleton = [];
+  for (let i = 0; i < 2; i++) {
+    skeleton.push(
+      <div className="post" key={i}>
+        <div className="skeleton skeleton-img"></div>
+        <div className="content">
+          <h1 className="skeleton skeleton-heading"></h1>
+          <div className="skeleton skeleton-text"></div>
+          <div className="skeleton skeleton-text"></div>
+        </div>
+      </div>
+    );
+  }
+  // const spinner = (
+  //   <div className="d-flex align-items-center">
+  //     <div
+  //       className="spinner-border ms-auto"
+  //       role="status"
+  //       aria-hidden="true"
+  //     ></div>
+  //   </div>
+  // );
+  const menuContent = loading ? skeleton : similarPosts;
   return <div className="menu">{menuContent}</div>;
 }

@@ -129,7 +129,11 @@ export default function Signup() {
             onChange={(e) => setConfirmpassword(e.target.value)}
           />
           <div className="mb-3">
-            <label htmlFor="formFileSm" className="form-label">
+            <label
+              htmlFor="formFileSm"
+              className="form-label"
+              style={{ color: "#fff" }}
+            >
               Upload profile pic
             </label>
             <input
