@@ -6,6 +6,7 @@ import { getposts, editPost } from "../actions";
 export default function Home() {
   const navigate = useNavigate();
   const postItems = useSelector((state) => state?.postReducer?.posts);
+  const darkMode = useSelector((state) => state?.themeReducer?.darkMode);
   //const loading = true;
   const loading = useSelector((state) => state?.postReducer?.loading);
   const dispatch = useDispatch();
@@ -45,7 +46,13 @@ export default function Home() {
       postItems?.map((post) => (
         <div className="post" key={post._id}>
           <div className="img">
-            <img src={post.postimage} alt="" />
+            <img
+              src={
+                post.postimage ||
+                "https://murraysinteriors.com.au/wp-content/uploads/2018/09/dummy-banner-768x344.jpg"
+              }
+              alt=""
+            />
           </div>
           <div className="content">
             <Link className="link" to={`/post/${post._id}`}>
@@ -57,10 +64,17 @@ export default function Home() {
         </div>
       ))
     ) : (
-      <h1>No post in the selected category</h1>
+      <div className="text-center">
+        <h1
+          className={darkMode ? "heading--dark" : ""}
+          style={{ fontWeight: "bolder", fontWeight: "bolder" }}
+        >
+          No post in the selected category
+        </h1>
+      </div>
     );
   let skeleton = [];
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 3; i++) {
     skeleton.push(
       <div className="post" key={i}>
         <div className="skeleton skeleton-img"></div>

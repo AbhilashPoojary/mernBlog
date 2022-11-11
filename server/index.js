@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
-const loginRoute = require;
+const userRoute = require("./routes/user");
 
 dotenv.config();
 
@@ -25,6 +25,18 @@ app.use(morgan("common"));
 
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
+app.use("/api/user", userRoute);
+
+//error handler
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || "Something went wrong";
+  return res.status(status).json({
+    success: false,
+    status,
+    message,
+  });
+});
 
 app.get("/", (req, res) => {
   res.status(200).json("running on port 8800");

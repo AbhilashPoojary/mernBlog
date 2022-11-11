@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../img/customlogo.png";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
+  const darkTheme = useSelector((state) => state?.themeReducer?.darkMode);
   return (
-    <nav className="navbar navbar-expand-lg p-3">
+    <nav
+      className={`navbar navbar-expand-lg p-3 ${
+        darkTheme ? "navbar-dark" : "navbar-light"
+      }`}
+    >
       <div className="container-fluid p-0">
         <Link to="/" className="navbar-brand">
           <img src={logo} alt="logo" />

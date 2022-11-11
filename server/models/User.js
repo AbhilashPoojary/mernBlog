@@ -38,6 +38,26 @@ const UserSchema = new mongoose.Schema(
       default:
         "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     },
+    coverPicture: {
+      type: String,
+      default:
+        "https://murraysinteriors.com.au/wp-content/uploads/2018/09/dummy-banner-768x344.jpg",
+    },
+    phoneNo: {
+      type: Number,
+    },
+    education: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
+    town: {
+      type: String,
+    },
+    relationStatus: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

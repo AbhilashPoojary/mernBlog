@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { loginErr, registerUser, signErr } from "../actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Signup() {
+  const error = useSelector((state) => state?.registerReducer?.error?.message);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
   const [password, setPassword] = useState("");
-  const [profilePicture, setProfilePicture] = useState("");
+  const [profilePicture, setProfilePicture] = useState(
+    "https://res.cloudinary.com/dk0sqc1u9/image/upload/v1667468652/e9cvd7thjutanralp1jo.png"
+  );
   const [picLoading, setPicLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -90,6 +93,16 @@ export default function Signup() {
     }
   };
 
+  useEffect(() => {
+    toast.error(error, {
+      position: "top-right",
+      autoClose: 5000,
+      pauseOnHover: true,
+      draggable: true,
+    });
+    dispatch(loginErr());
+  }, [error]);
+
   return (
     <section className="login-section">
       <div className="login">
@@ -99,7 +112,6 @@ export default function Signup() {
             type="text"
             name="name"
             placeholder="Username"
-            required="required"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -107,7 +119,6 @@ export default function Signup() {
             type="text"
             name="email"
             placeholder="Email"
-            required="required"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -116,7 +127,6 @@ export default function Signup() {
             type="password"
             name="password"
             placeholder="Password"
-            required="required"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -124,7 +134,6 @@ export default function Signup() {
             type="password"
             name="confirmpassword"
             placeholder="Confirm Password"
-            required="required"
             value={confirmpassword}
             onChange={(e) => setConfirmpassword(e.target.value)}
           />
@@ -142,7 +151,6 @@ export default function Signup() {
               type="file"
               accept="image/*"
               onChange={(e) => postDetails(e.target.files[0])}
-              required
             />
           </div>
           <div className="d-flex justify-content-between">

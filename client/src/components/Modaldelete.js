@@ -11,7 +11,7 @@ export default function Modaldelete(props) {
   const post = useSelector((state) => state?.post?.currentPost);
   const dispatch = useDispatch();
   const performDelete = () => {
-    dispatch(deletePost(post._id));
+    dispatch(deletePost(post?._id));
   };
 
   return (

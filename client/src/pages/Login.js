@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../actions";
+import { loginErr, loginUser, signErr } from "../actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,7 +9,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const error = useSelector((state) => state?.loginReducer?.error);
+  const error = useSelector((state) => state?.loginReducer?.error?.message);
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -27,6 +27,7 @@ export default function Login() {
       pauseOnHover: true,
       draggable: true,
     });
+    dispatch(signErr());
   }, [error]);
   return (
     <section className="login-section">
@@ -39,7 +40,6 @@ export default function Login() {
             placeholder="abc@mymail.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
           <input
             type="password"
@@ -47,7 +47,6 @@ export default function Login() {
             placeholder="*******"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
           <div className="d-flex justify-content-between">
             <button

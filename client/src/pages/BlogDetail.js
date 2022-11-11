@@ -66,7 +66,13 @@ export default function BlogDetail() {
     skeleton
   ) : (
     <div className="content">
-      <img src={post?.postimage} alt="" />
+      <img
+        src={
+          post?.postimage ||
+          "https://murraysinteriors.com.au/wp-content/uploads/2018/09/dummy-banner-768x344.jpg"
+        }
+        alt=""
+      />
       <div className="user">
         <img src={post?.profilePicture} alt="" />
         <div className="info">

@@ -28,7 +28,13 @@ export default function Menu() {
         <h1>Other posts you may like</h1>
         {diffposts?.map((post) => (
           <div className="post" key={post?._id}>
-            <img src={post?.postimage} alt="" />
+            <img
+              src={
+                post?.postimage ||
+                "https://murraysinteriors.com.au/wp-content/uploads/2018/09/dummy-banner-768x344.jpg"
+              }
+              alt=""
+            />
             <h2>{post?.title}</h2>
             <button onClick={() => postRoute(post?._id)}>Read More</button>
           </div>

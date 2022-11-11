@@ -77,6 +77,9 @@ export default function Create() {
         postimage: file,
         category: cat,
         postId: post?._id,
+        username: currentUser?.username,
+        profilePicture: currentUser?.profilePicture,
+        userId: currentUser?._id,
       };
       dispatch(updatePost(postItems));
       dispatch(editPost(false));
@@ -88,6 +91,7 @@ export default function Create() {
         title,
         username: currentUser?.username,
         profilePicture: currentUser?.profilePicture,
+        userId: currentUser?._id,
       };
       dispatch(createPost(postItems));
     }
@@ -105,7 +109,7 @@ export default function Create() {
   console.log(value);
 
   return (
-    <section className="container" style={{ height: "calc(100vh - 180px)" }}>
+    <section className="container" style={{ minHeight: "calc(100vh - 180px)" }}>
       <div className="create-section">
         <div className="content">
           <input
@@ -148,7 +152,9 @@ export default function Create() {
             )}
             <div className="buttons">
               <button>Save as a draft</button>
-              <button onClick={publishPost}>Publish</button>
+              <button onClick={publishPost}>
+                {changePost ? "Update" : "Publish"}
+              </button>
             </div>
           </div>
           <div className="item">

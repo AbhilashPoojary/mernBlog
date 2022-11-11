@@ -30,6 +30,7 @@ const Layout = () => {
 
 function App() {
   const user = useSelector((state) => state?.loginReducer?.currentUser);
+  const darkMode = useSelector((state) => state?.themeReducer?.darkMode);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -63,7 +64,7 @@ function App() {
     },
   ]);
   return (
-    <section>
+    <section className={`${darkMode ? "dark--mode" : "light--mode"}`}>
       <RouterProvider router={router} />
     </section>
   );

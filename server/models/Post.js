@@ -30,6 +30,9 @@ const PostSchema = new mongoose.Schema(
       default:
         "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     },
+    userId: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

@@ -14,6 +14,11 @@ export const registerReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    case "REMOVE_ERROR_SIGN":
+      return {
+        loading: false,
+        error: false,
+      };
     default:
       return state;
   }

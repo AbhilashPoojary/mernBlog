@@ -7,7 +7,7 @@ export const registerUser = (user) => async (dispatch) => {
     dispatch({ type: "USER_REGISTER_SUCCESS", payload: response.data });
     window.location.href = "/login";
   } catch (error) {
-    dispatch({ type: "USER_REGISTER_FAILED", payload: error });
+    dispatch({ type: "USER_REGISTER_FAILED", payload: error.response.data });
   }
 };
 
@@ -20,6 +20,31 @@ export const loginUser = (user) => async (dispatch, getState) => {
     window.location.href = "/";
   } catch (error) {
     dispatch({ type: "USER_LOGIN_FAILED", payload: error.response.data });
+  }
+};
+
+export const loginErr = () => (dispatch) => {
+  dispatch({ type: "REMOVE_ERROR_LOGIN" });
+};
+
+export const signErr = () => (dispatch) => {
+  dispatch({ type: "REMOVE_ERROR_SIGN" });
+};
+
+export const darkMode = (dark) => (dispatch) => {
+  dispatch({ type: "CHANGE_MODE", payload: dark });
+  console.log(dark);
+  localStorage.setItem("theme", JSON.stringify(dark));
+};
+
+export const updateUser = (user) => async (dispatch) => {
+  dispatch({ type: "USER_UPDATE_REQUEST" });
+  try {
+    const response = await axios.post("/api/user/updateuser", user);
+    dispatch({ type: "USER_UPDATE_SUCCESS", payload: response.data });
+    localStorage.setItem("currentUser", JSON.stringify(response.data));
+  } catch (error) {
+    dispatch({ type: "USER_UPDATE_FAILED", payload: error.response.data });
   }
 };
 
